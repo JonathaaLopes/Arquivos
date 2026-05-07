@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Referência Completa de CSS</title>
+  <style>
+    body { font-family: Consolas, monospace; background: #1e1e1e; color: #d4d4d4; margin: 0; padding: 0; }
+    header { background: #252526; border-bottom: 2px solid #ce9178; padding: 24px 40px; }
+    header h1 { color: #ce9178; font-size: 1.6rem; margin: 0; }
+    header p { color: #858585; margin: 6px 0 0; font-size: 0.9rem; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 30px 40px; }
+    .section { margin-bottom: 52px; }
+    .section-title {
+      color: #9cdcfe; font-size: 1.05rem; font-weight: bold;
+      border-left: 4px solid #ce9178; padding-left: 12px;
+      margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+    th { background: #2d2d2d; color: #9cdcfe; padding: 10px 14px; text-align: left; border-bottom: 1px solid #3c3c3c; }
+    td { padding: 9px 14px; border-bottom: 1px solid #2a2a2a; vertical-align: top; }
+    tr:hover td { background: #2a2d2e; }
+    .prop { color: #9cdcfe; font-weight: bold; white-space: nowrap; }
+    .val { color: #ce9178; font-size: 0.82rem; }
+    .desc { color: #d4d4d4; }
+    .ex { color: #6a9955; font-size: 0.82rem; font-style: italic; }
+    .badge { display: inline-block; font-size: 0.68rem; padding: 1px 7px; border-radius: 3px; margin-left: 5px; vertical-align: middle; }
+    .b-layout  { background: #264f78; color: #9cdcfe; }
+    .b-visual  { background: #3c3c00; color: #dcdcaa; }
+    .b-text    { background: #1e3a1e; color: #4ec9b0; }
+    .b-anim    { background: #3a1c3a; color: #c586c0; }
+    .b-resp    { background: #3a2200; color: #f5a623; }
+    .search-bar {
+      background: #2d2d2d; border: 1px solid #3c3c3c; color: #d4d4d4;
+      padding: 10px 16px; width: 100%; font-family: Consolas, monospace;
+      font-size: 0.95rem; border-radius: 4px; margin-bottom: 30px; box-sizing: border-box;
+    }
+    .search-bar:focus { outline: none; border-color: #ce9178; }
+    .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; font-size: 0.8rem; }
+    .legend span { display: flex; align-items: center; gap: 6px; color: #858585; }
+    .hidden { display: none; }
+    code { background: #2d2d2d; padding: 1px 5px; border-radius: 3px; font-size: 0.82rem; color: #ce9178; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>{ } Referência Completa — CSS</h1>
+  <p>Propriedades, valores, exemplos e observações. Abra no VSCode ou navegador.</p>
+</header>
+
+<div class="container">
+
+  <input class="search-bar" type="text" id="search" placeholder="🔍  Pesquisar propriedade... ex: flex, margin, color" oninput="filtrar()">
+
+  <div class="legend">
+    <span><span class="badge b-layout">layout</span> Posicionamento e estrutura</span>
+    <span><span class="badge b-visual">visual</span> Cores, bordas, sombras</span>
+    <span><span class="badge b-text">texto</span> Tipografia</span>
+    <span><span class="badge b-anim">animação</span> Transições e keyframes</span>
+    <span><span class="badge b-resp">responsivo</span> Media queries e variáveis</span>
+  </div>
+
+  <!-- ===================== SELETORES ===================== -->
+  <div class="section">
+    <div class="section-title">🎯 Seletores</div>
+    <table>
+      <thead><tr><th>Seletor</th><th>O que seleciona</th><th>Exemplo</th></tr></thead>
+      <tbody>
+        <tr><td><span class="prop">*</span></td><td class="desc">Todos os elementos da página.</td><td class="ex">* { box-sizing: border-box; }</td></tr>
+        <tr><td><span class="prop">tag</span></td><td class="desc">Todos os elementos daquela tag.</td><td class="ex">p { color: gray; }</td></tr>
+        <tr><td><span class="prop">.classe</span></td><td class="desc">Elementos com aquela classe.</td><td class="ex">.card { padding: 20px; }</td></tr>
+        <tr><td><span class="prop">#id</span></td><td class="desc">Elemento com aquele ID (único).</td><td class="ex">#header { background: black; }</td></tr>
+        <tr><td><span class="prop">A B</span></td><td class="desc">B que é descendente de A (qualquer nível).</td><td class="ex">nav a { color: white; }</td></tr>
+        <tr><td><span class="prop">A > B</span></td><td class="desc">B filho direto de A.</td><td class="ex">ul > li { list-style: none; }</td></tr>
+        <tr><td><span class="prop">A + B</span></td><td class="desc">B imediatamente após A (irmão adjacente).</td><td class="ex">h2 + p { margin-top: 0; }</td></tr>
+        <tr><td><span class="prop">A ~ B</span></td><td class="desc">Todos os B irmãos após A.</td><td class="ex">h2 ~ p { color: gray; }</td></tr>
+        <tr><td><span class="prop">A, B</span></td><td class="desc">A e B ao mesmo tempo.</td><td class="ex">h1, h2, h3 { font-weight: bold; }</td></tr>
+        <tr><td><span class="prop">[attr]</span></td><td class="desc">Elementos com aquele atributo.</td><td class="ex">[disabled] { opacity: 0.5; }</td></tr>
+        <tr><td><span class="prop">[attr="val"]</span></td><td class="desc">Atributo com valor exato.</td><td class="ex">input[type="email"] { border: 1px solid blue; }</td></tr>
+        <tr><td><span class="prop">[attr*="val"]</span></td><td class="desc">Atributo contém o valor.</td><td class="ex">a[href*="google"] { color: red; }</td></tr>
+        <tr><td><span class="prop">:hover</span></td><td class="desc">Elemento quando o mouse está sobre ele.</td><td class="ex">button:hover { background: blue; }</td></tr>
+        <tr><td><span class="prop">:focus</span></td><td class="desc">Elemento com foco (teclado/clique).</td><td class="ex">input:focus { outline: 2px solid blue; }</td></tr>
+        <tr><td><span class="prop">:active</span></td><td class="desc">Elemento sendo clicado.</td><td class="ex">button:active { transform: scale(0.98); }</td></tr>
+        <tr><td><span class="prop">:visited</span></td><td class="desc">Link já visitado.</td><td class="ex">a:visited { color: purple; }</td></tr>
+        <tr><td><span class="prop">:first-child</span></td><td class="desc">Primeiro filho do pai.</td><td class="ex">li:first-child { font-weight: bold; }</td></tr>
+        <tr><td><span class="prop">:last-child</span></td><td class="desc">Último filho do pai.</td><td class="ex">li:last-child { border: none; }</td></tr>
+        <tr><td><span class="prop">:nth-child(n)</span></td><td class="desc">Enésimo filho. Aceita odd, even, fórmulas.</td><td class="ex">tr:nth-child(even) { background: #f5f5f5; }</td></tr>
+        <tr><td><span class="prop">:not(seletor)</span></td><td class="desc">Elementos que NÃO batem com o seletor.</td><td class="ex">input:not([type="submit"]) { border: 1px solid gray; }</td></tr>
+        <tr><td><span class="prop">:checked</span></td><td class="desc">Checkbox ou radio marcado.</td><td class="ex">input:checked + label { color: green; }</td></tr>
+        <tr><td><span class="prop">:disabled / :enabled</span></td><td class="desc">Campos de formulário desabilitados ou habilitados.</td><td class="ex">input:disabled { opacity: 0.4; }</td></tr>
+        <tr><td><span class="prop">:placeholder-shown</span></td><td class="desc">Input com placeholder visível (campo vazio).</td><td class="ex">input:placeholder-shown { border-color: gray; }</td></tr>
+        <tr><td><span class="prop">::before / ::after</span></td><td class="desc">Pseudo-elemento — insere conteúdo antes/depois via CSS.</td><td class="ex">.btn::after { content: ' →'; }</td></tr>
+        <tr><td><span class="prop">::placeholder</span></td><td class="desc">Estiliza o texto placeholder de um input.</td><td class="ex">input::placeholder { color: #aaa; }</td></tr>
+        <tr><td><span class="prop">::selection</span></td><td class="desc">Texto selecionado pelo usuário.</td><td class="ex">::selection { background: yellow; }</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===================== BOX MODEL ===================== -->
+  <div class="section">
+    <div class="section-title">📦 Box Model</div>
+    <table>
+      <thead><tr><th>Propriedade</th><th>Valores comuns</th><th>O que faz</th><th>Exemplo</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="prop">width</span><span class="badge b-layout">layout</span></td>
+          <td class="val">px, %, vw, auto, min-content, max-content, fit-content</td>
+          <td class="desc">Largura do elemento.</td>
+          <td class="ex">width: 100%; / width: 300px;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">height</span><span class="badge b-layout">layout</span></td>
+          <td class="val">px, %, vh, auto</td>
+          <td class="desc">Altura do elemento.</td>
+          <td class="ex">height: 100vh; / height: auto;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">min-width / max-width</span><span class="badge b-layout">layout</span></td>
+          <td class="val">px, %</td>
+          <td class="desc">Limite mínimo e máximo de largura.</td>
+          <td class="ex">max-width: 1200px; margin: 0 auto;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">min-height / max-height</span><span class="badge b-layout">layout</span></td>
+          <td class="val">px, %</td>
+          <td class="desc">Limite mínimo e máximo de altura.</td>
+          <td class="ex">min-height: 100vh;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">margin</span><span class="badge b-layout">layout</span></td>
+          <td class="val">px, %, auto — 1 a 4 valores</td>
+          <td class="desc">Espaço externo ao elemento. Shorthand: top right bottom left.</td>
+          <td class="ex">margin: 20px; / margin: 10px 20px; / margin: 0 auto;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">padding</span><span class="badge b-layout">layout</span></td>
+          <td class="val">px, % — 1 a 4 valores</td>
+          <td class="desc">Espaço interno ao elemento (entre conteúdo e borda).</td>
+          <td class="ex">padding: 16px 24px; / padding-top: 10px;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">box-sizing</span><span class="badge b-layout">layout</span></td>
+          <td class="val">content-box (padrão), border-box</td>
+          <td class="desc">Define se padding/border incluem no cálculo do width.</td>
+          <td class="ex">box-sizing: border-box; /* recomendado */</td>
+        </tr>
+        <tr>
+          <td><span class="prop">border</span><span class="badge b-visual">visual</span></td>
+          <td class="val">largura estilo cor</td>
+          <td class="desc">Borda do elemento. Shorthand para width, style, color.</td>
+          <td class="ex">border: 1px solid #ddd; / border-bottom: 2px solid red;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">border-radius</span><span class="badge b-visual">visual</span></td>
+          <td class="val">px, %, 50%</td>
+          <td class="desc">Arredonda os cantos. 50% = círculo.</td>
+          <td class="ex">border-radius: 8px; / border-radius: 50%;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">outline</span><span class="badge b-visual">visual</span></td>
+          <td class="val">largura estilo cor, none</td>
+          <td class="desc">Borda fora do layout (não ocupa espaço). Aparece no :focus.</td>
+          <td class="ex">outline: none; / outline: 2px solid blue;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">overflow</span><span class="badge b-layout">layout</span></td>
+          <td class="val">visible, hidden, scroll, auto</td>
+          <td class="desc">O que fazer com conteúdo que ultrapassa o elemento.</td>
+          <td class="ex">overflow: hidden; / overflow-x: auto;</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===================== DISPLAY / POSITION ===================== -->
+  <div class="section">
+    <div class="section-title">📐 Display e Posicionamento</div>
+    <table>
+      <thead><tr><th>Propriedade</th><th>Valores comuns</th><th>O que faz</th><th>Exemplo</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="prop">display</span><span class="badge b-layout">layout</span></td>
+          <td class="val">block, inline, inline-block, flex, grid, none, contents</td>
+          <td class="desc">Define o tipo de renderização do elemento.</td>
+          <td class="ex">display: flex; / display: none; / display: grid;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">position</span><span class="badge b-layout">layout</span></td>
+          <td class="val">static, relative, absolute, fixed, sticky</td>
+          <td class="desc">Define o método de posicionamento. static = padrão.</td>
+          <td class="ex">position: fixed; top: 0; left: 0; /* navbar fixa */</td>
+        </tr>
+        <tr>
+          <td><span class="prop">top / right / bottom / left</span><span class="badge b-layout">layout</span></td>
+          <td class="val">px, %, auto</td>
+          <td class="desc">Posição do elemento quando position não é static.</td>
+          <td class="ex">position: absolute; top: 50%; left: 50%;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">z-index</span><span class="badge b-layout">layout</span></td>
+          <td class="val">número inteiro (pode ser negativo)</td>
+          <td class="desc">Controla a ordem de empilhamento (quem fica na frente).</td>
+          <td class="ex">z-index: 100; / z-index: -1;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">float</span><span class="badge b-layout">layout</span></td>
+          <td class="val">left, right, none</td>
+          <td class="desc">Flutua o elemento para um lado. Evite — prefira Flexbox.</td>
+          <td class="ex">float: left; width: 50%;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">clear</span><span class="badge b-layout">layout</span></td>
+          <td class="val">left, right, both, none</td>
+          <td class="desc">Cancela o efeito de float no elemento.</td>
+          <td class="ex">clear: both;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">visibility</span><span class="badge b-visual">visual</span></td>
+          <td class="val">visible, hidden, collapse</td>
+          <td class="desc">Mostra ou esconde sem remover o espaço do elemento.</td>
+          <td class="ex">visibility: hidden; /* ocupa espaço mas não aparece */</td>
+        </tr>
+        <tr>
+          <td><span class="prop">opacity</span><span class="badge b-visual">visual</span></td>
+          <td class="val">0 a 1</td>
+          <td class="desc">Transparência do elemento inteiro (0 = invisível, 1 = opaco).</td>
+          <td class="ex">opacity: 0.5; / opacity: 0;</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===================== FLEXBOX ===================== -->
+  <div class="section">
+    <div class="section-title">↔️ Flexbox</div>
+    <table>
+      <thead><tr><th>Propriedade</th><th>Valores comuns</th><th>O que faz</th><th>Exemplo</th></tr></thead>
+      <tbody>
+        <tr><td colspan="4" style="background:#252526;color:#858585;font-size:0.8rem;padding:8px 14px;">— No elemento PAI (container) —</td></tr>
+        <tr>
+          <td><span class="prop">display: flex</span><span class="badge b-layout">layout</span></td>
+          <td class="val">flex</td>
+          <td class="desc">Ativa o Flexbox no container. Filhos viram flex items.</td>
+          <td class="ex">display: flex;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">flex-direction</span><span class="badge b-layout">layout</span></td>
+          <td class="val">row, row-reverse, column, column-reverse</td>
+          <td class="desc">Direção do eixo principal. row = horizontal (padrão).</td>
+          <td class="ex">flex-direction: column;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">justify-content</span><span class="badge b-layout">layout</span></td>
+          <td class="val">flex-start, flex-end, center, space-between, space-around, space-evenly</td>
+          <td class="desc">Alinha itens no eixo principal (horizontal no row).</td>
+          <td class="ex">justify-content: space-between;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">align-items</span><span class="badge b-layout">layout</span></td>
+          <td class="val">stretch, flex-start, flex-end, center, baseline</td>
+          <td class="desc">Alinha itens no eixo cruzado (vertical no row).</td>
+          <td class="ex">align-items: center;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">align-content</span><span class="badge b-layout">layout</span></td>
+          <td class="val">flex-start, flex-end, center, space-between, stretch</td>
+          <td class="desc">Alinha múltiplas linhas (quando há wrap).</td>
+          <td class="ex">align-content: space-between;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">flex-wrap</span><span class="badge b-layout">layout</span></td>
+          <td class="val">nowrap (padrão), wrap, wrap-reverse</td>
+          <td class="desc">Permite que itens quebrem para a linha seguinte.</td>
+          <td class="ex">flex-wrap: wrap;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">gap</span><span class="badge b-layout">layout</span></td>
+          <td class="val">px, rem — 1 ou 2 valores (row-gap column-gap)</td>
+          <td class="desc">Espaço entre os itens. Substitui margin entre itens.</td>
+          <td class="ex">gap: 20px; / gap: 16px 24px;</td>
+        </tr>
+        <tr><td colspan="4" style="background:#252526;color:#858585;font-size:0.8rem;padding:8px 14px;">— No elemento FILHO (item) —</td></tr>
+        <tr>
+          <td><span class="prop">flex</span><span class="badge b-layout">layout</span></td>
+          <td class="val">grow shrink basis — ex: 1, 0 1 auto, 1 1 200px</td>
+          <td class="desc">Shorthand para flex-grow, flex-shrink e flex-basis.</td>
+          <td class="ex">flex: 1; /* ocupa espaço igual */ / flex: 0 0 300px;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">flex-grow</span><span class="badge b-layout">layout</span></td>
+          <td class="val">número (0 = padrão)</td>
+          <td class="desc">Fator de crescimento do item quando há espaço sobrando.</td>
+          <td class="ex">flex-grow: 1;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">flex-shrink</span><span class="badge b-layout">layout</span></td>
+          <td class="val">número (1 = padrão)</td>
+          <td class="desc">Fator de encolhimento quando não há espaço.</td>
+          <td class="ex">flex-shrink: 0; /* não encolhe */</td>
+        </tr>
+        <tr>
+          <td><span class="prop">flex-basis</span><span class="badge b-layout">layout</span></td>
+          <td class="val">px, %, auto</td>
+          <td class="desc">Tamanho inicial do item antes de distribuir o espaço.</td>
+          <td class="ex">flex-basis: 200px;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">align-self</span><span class="badge b-layout">layout</span></td>
+          <td class="val">auto, flex-start, flex-end, center, stretch</td>
+          <td class="desc">Alinhamento individual do item (sobrescreve align-items).</td>
+          <td class="ex">align-self: flex-end;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">order</span><span class="badge b-layout">layout</span></td>
+          <td class="val">número inteiro (0 = padrão)</td>
+          <td class="desc">Altera a ordem visual do item sem mudar o HTML.</td>
+          <td class="ex">order: -1; /* vai para o início */</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===================== GRID ===================== -->
+  <div class="section">
+    <div class="section-title">🔲 CSS Grid</div>
+    <table>
+      <thead><tr><th>Propriedade</th><th>Valores comuns</th><th>O que faz</th><th>Exemplo</th></tr></thead>
+      <tbody>
+        <tr><td colspan="4" style="background:#252526;color:#858585;font-size:0.8rem;padding:8px 14px;">— No elemento PAI (container) —</td></tr>
+        <tr>
+          <td><span class="prop">display: grid</span><span class="badge b-layout">layout</span></td>
+          <td class="val">grid</td>
+          <td class="desc">Ativa o Grid no container.</td>
+          <td class="ex">display: grid;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">grid-template-columns</span><span class="badge b-layout">layout</span></td>
+          <td class="val">px, fr, %, auto, repeat(), minmax()</td>
+          <td class="desc">Define as colunas da grade.</td>
+          <td class="ex">grid-template-columns: 1fr 1fr 1fr;<br>grid-template-columns: repeat(3, 1fr);<br>grid-template-columns: 200px auto 1fr;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">grid-template-rows</span><span class="badge b-layout">layout</span></td>
+          <td class="val">px, fr, auto, repeat()</td>
+          <td class="desc">Define as linhas da grade.</td>
+          <td class="ex">grid-template-rows: auto 1fr auto;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">grid-template-areas</span><span class="badge b-layout">layout</span></td>
+          <td class="val">nomes entre aspas</td>
+          <td class="desc">Nomeia áreas da grade para posicionar itens por nome.</td>
+          <td class="ex">grid-template-areas:<br>"header header"<br>"sidebar main"<br>"footer footer";</td>
+        </tr>
+        <tr>
+          <td><span class="prop">gap / column-gap / row-gap</span><span class="badge b-layout">layout</span></td>
+          <td class="val">px, rem</td>
+          <td class="desc">Espaço entre colunas e/ou linhas da grade.</td>
+          <td class="ex">gap: 24px; / column-gap: 20px; row-gap: 16px;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">justify-items</span><span class="badge b-layout">layout</span></td>
+          <td class="val">start, end, center, stretch</td>
+          <td class="desc">Alinha itens dentro das células horizontalmente.</td>
+          <td class="ex">justify-items: center;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">align-items</span><span class="badge b-layout">layout</span></td>
+          <td class="val">start, end, center, stretch</td>
+          <td class="desc">Alinha itens dentro das células verticalmente.</td>
+          <td class="ex">align-items: center;</td>
+        </tr>
+        <tr><td colspan="4" style="background:#252526;color:#858585;font-size:0.8rem;padding:8px 14px;">— No elemento FILHO (item) —</td></tr>
+        <tr>
+          <td><span class="prop">grid-column</span><span class="badge b-layout">layout</span></td>
+          <td class="val">início / fim — ex: 1 / 3, 1 / -1, span 2</td>
+          <td class="desc">Quantas colunas o item ocupa.</td>
+          <td class="ex">grid-column: 1 / 3; / grid-column: span 2;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">grid-row</span><span class="badge b-layout">layout</span></td>
+          <td class="val">início / fim</td>
+          <td class="desc">Quantas linhas o item ocupa.</td>
+          <td class="ex">grid-row: 1 / 3;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">grid-area</span><span class="badge b-layout">layout</span></td>
+          <td class="val">nome definido em grid-template-areas</td>
+          <td class="desc">Posiciona o item em uma área nomeada.</td>
+          <td class="ex">grid-area: header;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">justify-self / align-self</span><span class="badge b-layout">layout</span></td>
+          <td class="val">start, end, center, stretch</td>
+          <td class="desc">Alinhamento individual do item dentro da célula.</td>
+          <td class="ex">justify-self: end;</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===================== CORES E FUNDO ===================== -->
+  <div class="section">
+    <div class="section-title">🎨 Cores e Fundo</div>
+    <table>
+      <thead><tr><th>Propriedade</th><th>Valores comuns</th><th>O que faz</th><th>Exemplo</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="prop">color</span><span class="badge b-visual">visual</span></td>
+          <td class="val">nome, #hex, rgb(), rgba(), hsl()</td>
+          <td class="desc">Cor do texto.</td>
+          <td class="ex">color: #333; / color: rgba(0,0,0,0.8);</td>
+        </tr>
+        <tr>
+          <td><span class="prop">background-color</span><span class="badge b-visual">visual</span></td>
+          <td class="val">nome, #hex, rgb(), rgba(), transparent</td>
+          <td class="desc">Cor de fundo do elemento.</td>
+          <td class="ex">background-color: #f5f5f5;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">background-image</span><span class="badge b-visual">visual</span></td>
+          <td class="val">url(), linear-gradient(), radial-gradient()</td>
+          <td class="desc">Imagem ou gradiente de fundo.</td>
+          <td class="ex">background-image: url('img.jpg');<br>background-image: linear-gradient(to right, #f00, #00f);</td>
+        </tr>
+        <tr>
+          <td><span class="prop">background-size</span><span class="badge b-visual">visual</span></td>
+          <td class="val">cover, contain, px, %</td>
+          <td class="desc">Tamanho da imagem de fundo.</td>
+          <td class="ex">background-size: cover; / background-size: 100px 80px;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">background-position</span><span class="badge b-visual">visual</span></td>
+          <td class="val">center, top, bottom, left, right, px, %</td>
+          <td class="desc">Posição da imagem de fundo.</td>
+          <td class="ex">background-position: center center;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">background-repeat</span><span class="badge b-visual">visual</span></td>
+          <td class="val">repeat, no-repeat, repeat-x, repeat-y</td>
+          <td class="desc">Se a imagem de fundo se repete.</td>
+          <td class="ex">background-repeat: no-repeat;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">background-attachment</span><span class="badge b-visual">visual</span></td>
+          <td class="val">scroll, fixed, local</td>
+          <td class="desc">Se o fundo rola com a página ou fica fixo (efeito parallax).</td>
+          <td class="ex">background-attachment: fixed;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">background</span><span class="badge b-visual">visual</span></td>
+          <td class="val">shorthand</td>
+          <td class="desc">Shorthand para todas as propriedades background.</td>
+          <td class="ex">background: #fff url('bg.jpg') no-repeat center/cover;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">box-shadow</span><span class="badge b-visual">visual</span></td>
+          <td class="val">x y blur spread cor, inset</td>
+          <td class="desc">Sombra no elemento. Múltiplas separadas por vírgula.</td>
+          <td class="ex">box-shadow: 0 4px 20px rgba(0,0,0,0.1);<br>box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);</td>
+        </tr>
+        <tr>
+          <td><span class="prop">filter</span><span class="badge b-visual">visual</span></td>
+          <td class="val">blur(), brightness(), contrast(), grayscale(), drop-shadow()</td>
+          <td class="desc">Efeitos visuais no elemento (como Photoshop).</td>
+          <td class="ex">filter: blur(4px); / filter: grayscale(100%);<br>filter: brightness(1.2) contrast(0.9);</td>
+        </tr>
+        <tr>
+          <td><span class="prop">backdrop-filter</span><span class="badge b-visual">visual</span></td>
+          <td class="val">blur(), brightness()</td>
+          <td class="desc">Aplica filtro no conteúdo atrás do elemento (efeito vidro).</td>
+          <td class="ex">backdrop-filter: blur(10px); /* efeito glassmorphism */</td>
+        </tr>
+        <tr>
+          <td><span class="prop">mix-blend-mode</span><span class="badge b-visual">visual</span></td>
+          <td class="val">multiply, screen, overlay, darken, lighten...</td>
+          <td class="desc">Mistura de cores com o fundo (como Photoshop).</td>
+          <td class="ex">mix-blend-mode: multiply;</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===================== TIPOGRAFIA ===================== -->
+  <div class="section">
+    <div class="section-title">🔤 Tipografia</div>
+    <table>
+      <thead><tr><th>Propriedade</th><th>Valores comuns</th><th>O que faz</th><th>Exemplo</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="prop">font-family</span><span class="badge b-text">texto</span></td>
+          <td class="val">nome da fonte, fallbacks, sans-serif, serif, monospace</td>
+          <td class="desc">Define a fonte. Sempre liste fallbacks.</td>
+          <td class="ex">font-family: 'Roboto', Arial, sans-serif;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">font-size</span><span class="badge b-text">texto</span></td>
+          <td class="val">px, rem, em, %, vw</td>
+          <td class="desc">Tamanho do texto. rem = relativo ao root (html).</td>
+          <td class="ex">font-size: 1rem; / font-size: 16px; / font-size: clamp(14px, 2vw, 20px);</td>
+        </tr>
+        <tr>
+          <td><span class="prop">font-weight</span><span class="badge b-text">texto</span></td>
+          <td class="val">100–900, normal (400), bold (700)</td>
+          <td class="desc">Espessura da fonte.</td>
+          <td class="ex">font-weight: 700; / font-weight: bold;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">font-style</span><span class="badge b-text">texto</span></td>
+          <td class="val">normal, italic, oblique</td>
+          <td class="desc">Estilo da fonte.</td>
+          <td class="ex">font-style: italic;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">line-height</span><span class="badge b-text">texto</span></td>
+          <td class="val">número, px, % (1.5 recomendado)</td>
+          <td class="desc">Espaçamento entre linhas. Sem unidade é relativo ao font-size.</td>
+          <td class="ex">line-height: 1.6; / line-height: 24px;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">letter-spacing</span><span class="badge b-text">texto</span></td>
+          <td class="val">px, em</td>
+          <td class="desc">Espaço entre letras (tracking).</td>
+          <td class="ex">letter-spacing: 0.1em; / letter-spacing: 2px;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">word-spacing</span><span class="badge b-text">texto</span></td>
+          <td class="val">px, em</td>
+          <td class="desc">Espaço entre palavras.</td>
+          <td class="ex">word-spacing: 4px;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">text-align</span><span class="badge b-text">texto</span></td>
+          <td class="val">left, right, center, justify</td>
+          <td class="desc">Alinhamento horizontal do texto.</td>
+          <td class="ex">text-align: center; / text-align: justify;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">text-decoration</span><span class="badge b-text">texto</span></td>
+          <td class="val">none, underline, line-through, overline</td>
+          <td class="desc">Decoração do texto (sublinhado, riscado...).</td>
+          <td class="ex">text-decoration: none; / text-decoration: underline wavy red;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">text-transform</span><span class="badge b-text">texto</span></td>
+          <td class="val">uppercase, lowercase, capitalize, none</td>
+          <td class="desc">Transforma maiúsculas/minúsculas sem alterar o HTML.</td>
+          <td class="ex">text-transform: uppercase; / text-transform: capitalize;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">text-shadow</span><span class="badge b-text">texto</span></td>
+          <td class="val">x y blur cor</td>
+          <td class="desc">Sombra no texto.</td>
+          <td class="ex">text-shadow: 2px 2px 4px rgba(0,0,0,0.3);</td>
+        </tr>
+        <tr>
+          <td><span class="prop">text-overflow</span><span class="badge b-text">texto</span></td>
+          <td class="val">clip, ellipsis</td>
+          <td class="desc">O que mostrar quando o texto excede a largura. Use com overflow: hidden.</td>
+          <td class="ex">white-space: nowrap; overflow: hidden; text-overflow: ellipsis;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">white-space</span><span class="badge b-text">texto</span></td>
+          <td class="val">normal, nowrap, pre, pre-wrap, pre-line</td>
+          <td class="desc">Como espaços e quebras de linha são tratados.</td>
+          <td class="ex">white-space: nowrap; /* sem quebra de linha */</td>
+        </tr>
+        <tr>
+          <td><span class="prop">word-break</span><span class="badge b-text">texto</span></td>
+          <td class="val">normal, break-all, keep-all</td>
+          <td class="desc">Se palavras longas podem quebrar no meio.</td>
+          <td class="ex">word-break: break-all;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">@font-face</span><span class="badge b-text">texto</span></td>
+          <td class="val">font-family, src</td>
+          <td class="desc">Carrega uma fonte personalizada.</td>
+          <td class="ex">@font-face { font-family: 'Minha'; src: url('font.woff2'); }</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===================== TRANSFORM ===================== -->
+  <div class="section">
+    <div class="section-title">🔄 Transform</div>
+    <table>
+      <thead><tr><th>Propriedade / Função</th><th>Valores</th><th>O que faz</th><th>Exemplo</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="prop">transform</span><span class="badge b-anim">animação</span></td>
+          <td class="val">funções abaixo, separadas por espaço</td>
+          <td class="desc">Aplica transformações 2D/3D sem afetar o layout.</td>
+          <td class="ex">transform: translateX(10px) rotate(45deg);</td>
+        </tr>
+        <tr>
+          <td><span class="prop">translate(x, y)</span><span class="badge b-anim">animação</span></td>
+          <td class="val">px, %, translateX(), translateY()</td>
+          <td class="desc">Move o elemento.</td>
+          <td class="ex">transform: translate(-50%, -50%); /* centralizar */</td>
+        </tr>
+        <tr>
+          <td><span class="prop">scale(x, y)</span><span class="badge b-anim">animação</span></td>
+          <td class="val">número (1 = normal)</td>
+          <td class="desc">Escala o elemento. scaleX(), scaleY().</td>
+          <td class="ex">transform: scale(1.1); /* 10% maior no hover */</td>
+        </tr>
+        <tr>
+          <td><span class="prop">rotate(ângulo)</span><span class="badge b-anim">animação</span></td>
+          <td class="val">deg, rad, turn</td>
+          <td class="desc">Gira o elemento.</td>
+          <td class="ex">transform: rotate(45deg); / transform: rotate(-90deg);</td>
+        </tr>
+        <tr>
+          <td><span class="prop">skew(x, y)</span><span class="badge b-anim">animação</span></td>
+          <td class="val">deg</td>
+          <td class="desc">Inclina o elemento.</td>
+          <td class="ex">transform: skewX(20deg);</td>
+        </tr>
+        <tr>
+          <td><span class="prop">transform-origin</span><span class="badge b-anim">animação</span></td>
+          <td class="val">center, top left, px, %</td>
+          <td class="desc">Ponto de referência das transformações.</td>
+          <td class="ex">transform-origin: top left;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">perspective</span><span class="badge b-anim">animação</span></td>
+          <td class="val">px</td>
+          <td class="desc">Profundidade da perspectiva 3D.</td>
+          <td class="ex">perspective: 1000px;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">rotateX / rotateY / rotateZ</span><span class="badge b-anim">animação</span></td>
+          <td class="val">deg</td>
+          <td class="desc">Rotação em 3D nos eixos X, Y e Z.</td>
+          <td class="ex">transform: rotateY(45deg);</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===================== TRANSIÇÕES E ANIMAÇÕES ===================== -->
+  <div class="section">
+    <div class="section-title">✨ Transições e Animações</div>
+    <table>
+      <thead><tr><th>Propriedade</th><th>Valores comuns</th><th>O que faz</th><th>Exemplo</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="prop">transition</span><span class="badge b-anim">animação</span></td>
+          <td class="val">propriedade duração timing delay</td>
+          <td class="desc">Anima mudanças de estado (hover, focus). Shorthand.</td>
+          <td class="ex">transition: all 0.3s ease;<br>transition: background 0.2s, transform 0.3s ease-out;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">transition-timing-function</span><span class="badge b-anim">animação</span></td>
+          <td class="val">ease, linear, ease-in, ease-out, ease-in-out, cubic-bezier()</td>
+          <td class="desc">Curva de velocidade da transição.</td>
+          <td class="ex">transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);</td>
+        </tr>
+        <tr>
+          <td><span class="prop">animation</span><span class="badge b-anim">animação</span></td>
+          <td class="val">nome duração timing delay iteração direção fill-mode</td>
+          <td class="desc">Shorthand para animar com @keyframes.</td>
+          <td class="ex">animation: pulsar 1.5s ease-in-out infinite;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">@keyframes</span><span class="badge b-anim">animação</span></td>
+          <td class="val">from/to ou percentuais 0%–100%</td>
+          <td class="desc">Define os quadros de uma animação.</td>
+          <td class="ex">@keyframes pulsar {<br>  0% { transform: scale(1); }<br>  50% { transform: scale(1.1); }<br>  100% { transform: scale(1); }<br>}</td>
+        </tr>
+        <tr>
+          <td><span class="prop">animation-iteration-count</span><span class="badge b-anim">animação</span></td>
+          <td class="val">número, infinite</td>
+          <td class="desc">Quantas vezes a animação repete.</td>
+          <td class="ex">animation-iteration-count: infinite;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">animation-direction</span><span class="badge b-anim">animação</span></td>
+          <td class="val">normal, reverse, alternate, alternate-reverse</td>
+          <td class="desc">Se a animação volta ao início ou inverte.</td>
+          <td class="ex">animation-direction: alternate;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">animation-fill-mode</span><span class="badge b-anim">animação</span></td>
+          <td class="val">none, forwards, backwards, both</td>
+          <td class="desc">Estado do elemento antes/depois da animação.</td>
+          <td class="ex">animation-fill-mode: forwards;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">animation-play-state</span><span class="badge b-anim">animação</span></td>
+          <td class="val">running, paused</td>
+          <td class="desc">Pausa ou retoma a animação.</td>
+          <td class="ex">animation-play-state: paused; /* pausa no hover */</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===================== RESPONSIVO ===================== -->
+  <div class="section">
+    <div class="section-title">📱 Responsividade e Variáveis</div>
+    <table>
+      <thead><tr><th>Recurso</th><th>Sintaxe</th><th>O que faz</th><th>Exemplo</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="prop">@media</span><span class="badge b-resp">responsivo</span></td>
+          <td class="val">min-width, max-width, orientation, print</td>
+          <td class="desc">Aplica CSS apenas em determinadas condições (tamanho de tela).</td>
+          <td class="ex">@media (max-width: 768px) {<br>  .menu { display: none; }<br>}<br>@media (min-width: 1024px) { ... }</td>
+        </tr>
+        <tr>
+          <td><span class="prop">Breakpoints comuns</span><span class="badge b-resp">responsivo</span></td>
+          <td class="val">—</td>
+          <td class="desc">Referência de tamanhos de tela padrão.</td>
+          <td class="ex">/* Mobile */ max-width: 480px<br>/* Tablet */ max-width: 768px<br>/* Desktop */ max-width: 1024px<br>/* Wide */ min-width: 1200px</td>
+        </tr>
+        <tr>
+          <td><span class="prop">--variável (Custom Properties)</span><span class="badge b-resp">responsivo</span></td>
+          <td class="val">qualquer valor CSS</td>
+          <td class="desc">Variável CSS reutilizável. Declarada com -- e usada com var().</td>
+          <td class="ex">:root { --cor-primaria: #2E7D32; }<br>button { background: var(--cor-primaria); }</td>
+        </tr>
+        <tr>
+          <td><span class="prop">clamp()</span><span class="badge b-resp">responsivo</span></td>
+          <td class="val">mín, preferido, máx</td>
+          <td class="desc">Valor fluido entre um mínimo e máximo. Ideal para font-size responsivo.</td>
+          <td class="ex">font-size: clamp(14px, 2.5vw, 22px);</td>
+        </tr>
+        <tr>
+          <td><span class="prop">Unidades relativas</span><span class="badge b-resp">responsivo</span></td>
+          <td class="val">vw, vh, vmin, vmax, rem, em, %</td>
+          <td class="desc">Unidades que se adaptam ao tamanho da tela ou do pai.</td>
+          <td class="ex">width: 100vw; /* 100% da viewport */<br>font-size: 1rem; /* relativo ao :root */<br>padding: 1em; /* relativo ao font-size do pai */</td>
+        </tr>
+        <tr>
+          <td><span class="prop">@media (prefers-color-scheme)</span><span class="badge b-resp">responsivo</span></td>
+          <td class="val">dark, light</td>
+          <td class="desc">Detecta se o usuário usa dark mode ou light mode.</td>
+          <td class="ex">@media (prefers-color-scheme: dark) {<br>  body { background: #000; color: #fff; }<br>}</td>
+        </tr>
+        <tr>
+          <td><span class="prop">@media print</span><span class="badge b-resp">responsivo</span></td>
+          <td class="val">print</td>
+          <td class="desc">CSS aplicado ao imprimir a página.</td>
+          <td class="ex">@media print { nav, footer { display: none; } }</td>
+        </tr>
+        <tr>
+          <td><span class="prop">object-fit</span><span class="badge b-layout">layout</span></td>
+          <td class="val">fill, contain, cover, none, scale-down</td>
+          <td class="desc">Como imagem/vídeo preenche o container.</td>
+          <td class="ex">img { width: 100%; height: 200px; object-fit: cover; }</td>
+        </tr>
+        <tr>
+          <td><span class="prop">object-position</span><span class="badge b-layout">layout</span></td>
+          <td class="val">center, top, left, px, %</td>
+          <td class="desc">Posiciona a imagem dentro do container com object-fit.</td>
+          <td class="ex">object-position: center top;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">aspect-ratio</span><span class="badge b-layout">layout</span></td>
+          <td class="val">16/9, 4/3, 1, auto</td>
+          <td class="desc">Mantém proporção do elemento automaticamente.</td>
+          <td class="ex">aspect-ratio: 16 / 9;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">cursor</span><span class="badge b-visual">visual</span></td>
+          <td class="val">pointer, default, text, move, not-allowed, grab...</td>
+          <td class="desc">Aparência do cursor do mouse sobre o elemento.</td>
+          <td class="ex">cursor: pointer; / cursor: not-allowed;</td>
+        </tr>
+        <tr>
+          <td><span class="prop">pointer-events</span><span class="badge b-visual">visual</span></td>
+          <td class="val">auto, none</td>
+          <td class="desc">Desativa interações do mouse no elemento.</td>
+          <td class="ex">pointer-events: none; /* cliques passam pelo elemento */</td>
+        </tr>
+        <tr>
+          <td><span class="prop">user-select</span><span class="badge b-visual">visual</span></td>
+          <td class="val">auto, none, all, text</td>
+          <td class="desc">Controla se o texto pode ser selecionado pelo usuário.</td>
+          <td class="ex">user-select: none; /* impede seleção */</td>
+        </tr>
+        <tr>
+          <td><span class="prop">resize</span><span class="badge b-layout">layout</span></td>
+          <td class="val">none, both, horizontal, vertical</td>
+          <td class="desc">Se o usuário pode redimensionar o elemento (textarea).</td>
+          <td class="ex">textarea { resize: vertical; }</td>
+        </tr>
+        <tr>
+          <td><span class="prop">scroll-behavior</span><span class="badge b-layout">layout</span></td>
+          <td class="val">auto, smooth</td>
+          <td class="desc">Animação de scroll ao navegar para âncoras (#).</td>
+          <td class="ex">html { scroll-behavior: smooth; }</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+  function filtrar() {
+    const termo = document.getElementById('search').value.toLowerCase();
+    const linhas = document.querySelectorAll('table tbody tr');
+    linhas.forEach(linha => {
+      linha.classList.toggle('hidden', !linha.textContent.toLowerCase().includes(termo));
+    });
+    document.querySelectorAll('.section').forEach(sec => {
+      const vis = sec.querySelectorAll('tbody tr:not(.hidden)');
+      sec.style.display = vis.length === 0 && termo ? 'none' : '';
+    });
+  }
+</script>
+
+</body>
+</html>
