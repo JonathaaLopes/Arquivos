@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Referência Completa de Tags HTML</title>
+  <style>
+    body { font-family: Consolas, monospace; background: #1e1e1e; color: #d4d4d4; margin: 0; padding: 0; }
+    header { background: #252526; border-bottom: 2px solid #007acc; padding: 24px 40px; }
+    header h1 { color: #007acc; font-size: 1.6rem; margin: 0; }
+    header p { color: #858585; margin: 6px 0 0; font-size: 0.9rem; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 30px 40px; }
+    .section { margin-bottom: 48px; }
+    .section-title {
+      color: #569cd6; font-size: 1.1rem; font-weight: bold;
+      border-left: 4px solid #007acc; padding-left: 12px;
+      margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .tag-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    .tag-table th {
+      background: #2d2d2d; color: #9cdcfe; padding: 10px 14px;
+      text-align: left; border-bottom: 1px solid #3c3c3c;
+    }
+    .tag-table td { padding: 9px 14px; border-bottom: 1px solid #2a2a2a; vertical-align: top; }
+    .tag-table tr:hover td { background: #2a2d2e; }
+    .tag { color: #4ec9b0; font-weight: bold; white-space: nowrap; }
+    .desc { color: #d4d4d4; }
+    .example { color: #ce9178; font-size: 0.82rem; }
+    .note { color: #6a9955; font-size: 0.8rem; font-style: italic; }
+    .badge {
+      display: inline-block; font-size: 0.7rem; padding: 1px 7px;
+      border-radius: 3px; margin-left: 6px; vertical-align: middle;
+    }
+    .badge-block { background: #264f78; color: #9cdcfe; }
+    .badge-inline { background: #3c3c00; color: #dcdcaa; }
+    .badge-meta { background: #3a1c3a; color: #c586c0; }
+    .badge-new { background: #1e3a1e; color: #4ec9b0; }
+    .badge-deprecated { background: #4a1515; color: #f44747; }
+    .search-bar {
+      background: #2d2d2d; border: 1px solid #3c3c3c; color: #d4d4d4;
+      padding: 10px 16px; width: 100%; font-family: Consolas, monospace;
+      font-size: 0.95rem; border-radius: 4px; margin-bottom: 30px;
+      box-sizing: border-box;
+    }
+    .search-bar:focus { outline: none; border-color: #007acc; }
+    .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; font-size: 0.8rem; }
+    .legend span { display: flex; align-items: center; gap: 6px; color: #858585; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>&lt;/&gt; Referência Completa — Tags HTML</h1>
+  <p>Todas as tags HTML com descrição, exemplo de uso e observações. Abra no VSCode ou navegador.</p>
+</header>
+
+<div class="container">
+
+  <input class="search-bar" type="text" id="search" placeholder="🔍  Pesquisar tag... ex: div, img, form" oninput="filtrar()">
+
+  <div class="legend">
+    <span><span class="badge badge-block">bloco</span> Elemento de bloco (ocupa linha inteira)</span>
+    <span><span class="badge badge-inline">inline</span> Elemento inline (fica na mesma linha)</span>
+    <span><span class="badge badge-meta">meta</span> Metadado / não visível na tela</span>
+    <span><span class="badge badge-new">HTML5</span> Introduzido no HTML5</span>
+    <span><span class="badge badge-deprecated">obsoleto</span> Não usar — deprecated</span>
+  </div>
+
+  <!-- ==================== ESTRUTURA ==================== -->
+  <div class="section">
+    <div class="section-title">📄 Estrutura do Documento</div>
+    <table class="tag-table">
+      <thead><tr><th>Tag</th><th>O que faz</th><th>Exemplo</th><th>Obs</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag">&lt;!DOCTYPE html&gt;</span><span class="badge badge-meta">meta</span></td>
+          <td class="desc">Declara que o documento é HTML5. Deve ser a primeira linha do arquivo.</td>
+          <td class="example">&lt;!DOCTYPE html&gt;</td>
+          <td class="note">Obrigatório. Não é uma tag HTML de verdade, é uma instrução.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;html&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Elemento raiz. Envolve todo o conteúdo da página.</td>
+          <td class="example">&lt;html lang="pt-BR"&gt;...&lt;/html&gt;</td>
+          <td class="note">Use o atributo <code>lang</code> para acessibilidade e SEO.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;head&gt;</span><span class="badge badge-meta">meta</span></td>
+          <td class="desc">Contém metadados da página: título, CSS, scripts, charset. Não é visível.</td>
+          <td class="example">&lt;head&gt;...&lt;/head&gt;</td>
+          <td class="note">Tudo aqui é lido pelo navegador mas não aparece na tela.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;body&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Contém todo o conteúdo visível da página.</td>
+          <td class="example">&lt;body&gt;...&lt;/body&gt;</td>
+          <td class="note">Só pode haver um &lt;body&gt; por página.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;title&gt;</span><span class="badge badge-meta">meta</span></td>
+          <td class="desc">Define o título da aba do navegador e aparece nos resultados do Google.</td>
+          <td class="example">&lt;title&gt;Minha Página&lt;/title&gt;</td>
+          <td class="note">Vai dentro do &lt;head&gt;.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;meta&gt;</span><span class="badge badge-meta">meta</span></td>
+          <td class="desc">Define metadados: charset, viewport, descrição, autor, etc.</td>
+          <td class="example">&lt;meta charset="UTF-8"&gt;<br>&lt;meta name="viewport" content="width=device-width"&gt;</td>
+          <td class="note">Tag sem fechamento. Essencial para responsividade e encoding.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;link&gt;</span><span class="badge badge-meta">meta</span></td>
+          <td class="desc">Vincula recursos externos, principalmente arquivos CSS.</td>
+          <td class="example">&lt;link rel="stylesheet" href="style.css"&gt;</td>
+          <td class="note">Também usado para favicons: rel="icon".</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;style&gt;</span><span class="badge badge-meta">meta</span></td>
+          <td class="desc">CSS escrito diretamente no HTML.</td>
+          <td class="example">&lt;style&gt; body { color: red; } &lt;/style&gt;</td>
+          <td class="note">Vai no &lt;head&gt;. Prefira arquivos .css externos.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;script&gt;</span><span class="badge badge-meta">meta</span></td>
+          <td class="desc">Insere ou vincula código JavaScript.</td>
+          <td class="example">&lt;script src="app.js"&gt;&lt;/script&gt;</td>
+          <td class="note">Coloque antes de &lt;/body&gt; para não travar o carregamento.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== TEXTO ==================== -->
+  <div class="section">
+    <div class="section-title">✏️ Texto e Títulos</div>
+    <table class="tag-table">
+      <thead><tr><th>Tag</th><th>O que faz</th><th>Exemplo</th><th>Obs</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag">&lt;h1&gt; ~ &lt;h6&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Títulos de hierarquia. h1 é o mais importante, h6 o menor.</td>
+          <td class="example">&lt;h1&gt;Título Principal&lt;/h1&gt;<br>&lt;h2&gt;Subtítulo&lt;/h2&gt;</td>
+          <td class="note">Use apenas um &lt;h1&gt; por página. Importante para SEO.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;p&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Parágrafo de texto.</td>
+          <td class="example">&lt;p&gt;Este é um parágrafo.&lt;/p&gt;</td>
+          <td class="note">Adiciona espaço automático acima e abaixo.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;span&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Container inline genérico para estilizar partes de um texto.</td>
+          <td class="example">&lt;p&gt;Texto &lt;span style="color:red"&gt;vermelho&lt;/span&gt;&lt;/p&gt;</td>
+          <td class="note">Não quebra a linha. Use para estilizar trechos.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;strong&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Texto em negrito com importância semântica.</td>
+          <td class="example">&lt;strong&gt;Atenção!&lt;/strong&gt;</td>
+          <td class="note">Use em vez de &lt;b&gt; pois tem significado semântico.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;em&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Texto em itálico com ênfase semântica.</td>
+          <td class="example">&lt;em&gt;muito importante&lt;/em&gt;</td>
+          <td class="note">Use em vez de &lt;i&gt; para ênfase real.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;br&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Quebra de linha forçada.</td>
+          <td class="example">Linha 1&lt;br&gt;Linha 2</td>
+          <td class="note">Tag sem fechamento. Use com moderação.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;hr&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Linha horizontal divisória.</td>
+          <td class="example">&lt;hr&gt;</td>
+          <td class="note">Tag sem fechamento. Pode ser estilizada com CSS.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;blockquote&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Citação longa em bloco destacado.</td>
+          <td class="example">&lt;blockquote&gt;"Frase famosa"&lt;/blockquote&gt;</td>
+          <td class="note">Usa o atributo cite para indicar a fonte.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;q&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Citação curta inline. Adiciona aspas automaticamente.</td>
+          <td class="example">&lt;q&gt;Citação curta&lt;/q&gt;</td>
+          <td class="note">Para citações dentro de um parágrafo.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;code&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Exibe código com fonte monoespaçada.</td>
+          <td class="example">&lt;code&gt;console.log()&lt;/code&gt;</td>
+          <td class="note">Para trechos de código inline.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;pre&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Texto pré-formatado — preserva espaços e quebras de linha.</td>
+          <td class="example">&lt;pre&gt;  espaços  preservados&lt;/pre&gt;</td>
+          <td class="note">Combinado com &lt;code&gt; para blocos de código.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;mark&gt;</span><span class="badge badge-inline">inline</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Destaca texto como marcador amarelo.</td>
+          <td class="example">&lt;mark&gt;texto destacado&lt;/mark&gt;</td>
+          <td class="note">Útil para resultados de busca.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;small&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Texto menor — notas, avisos legais, copyright.</td>
+          <td class="example">&lt;small&gt;© 2025&lt;/small&gt;</td>
+          <td class="note"></td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;sub&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Texto subscrito (abaixo da linha base).</td>
+          <td class="example">H&lt;sub&gt;2&lt;/sub&gt;O</td>
+          <td class="note">Fórmulas químicas.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;sup&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Texto sobrescrito (acima da linha base).</td>
+          <td class="example">x&lt;sup&gt;2&lt;/sup&gt;</td>
+          <td class="note">Potências e notas de rodapé.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;del&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Texto deletado — aparece com riscado.</td>
+          <td class="example">&lt;del&gt;R$ 99&lt;/del&gt; R$ 49</td>
+          <td class="note">Útil para preços antigos em promoções.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;ins&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Texto inserido — aparece sublinhado.</td>
+          <td class="example">&lt;ins&gt;novo conteúdo&lt;/ins&gt;</td>
+          <td class="note">Indica conteúdo adicionado.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;abbr&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Abreviação — mostra o significado no hover.</td>
+          <td class="example">&lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;</td>
+          <td class="note">Melhora a acessibilidade.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== LISTAS ==================== -->
+  <div class="section">
+    <div class="section-title">📋 Listas</div>
+    <table class="tag-table">
+      <thead><tr><th>Tag</th><th>O que faz</th><th>Exemplo</th><th>Obs</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag">&lt;ul&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Lista não ordenada (bolinhas).</td>
+          <td class="example">&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;</td>
+          <td class="note">Use para itens sem ordem específica.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;ol&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Lista ordenada (números).</td>
+          <td class="example">&lt;ol&gt;&lt;li&gt;Passo 1&lt;/li&gt;&lt;/ol&gt;</td>
+          <td class="note">Atributos: start, reversed, type.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;li&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Item de uma lista (ul ou ol).</td>
+          <td class="example">&lt;li&gt;Meu item&lt;/li&gt;</td>
+          <td class="note">Filho direto de &lt;ul&gt; ou &lt;ol&gt;.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;dl&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Lista de definições (termos e descrições).</td>
+          <td class="example">&lt;dl&gt;&lt;dt&gt;HTML&lt;/dt&gt;&lt;dd&gt;Linguagem...&lt;/dd&gt;&lt;/dl&gt;</td>
+          <td class="note">Ótimo para glossários.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;dt&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Termo da lista de definição.</td>
+          <td class="example">&lt;dt&gt;CSS&lt;/dt&gt;</td>
+          <td class="note">Filho de &lt;dl&gt;.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;dd&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Descrição do termo na lista de definição.</td>
+          <td class="example">&lt;dd&gt;Cascading Style Sheets&lt;/dd&gt;</td>
+          <td class="note">Filho de &lt;dl&gt;.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== LINKS E MÍDIA ==================== -->
+  <div class="section">
+    <div class="section-title">🔗 Links e Mídia</div>
+    <table class="tag-table">
+      <thead><tr><th>Tag</th><th>O que faz</th><th>Exemplo</th><th>Obs</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag">&lt;a&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Link — ancora para outra página, seção ou arquivo.</td>
+          <td class="example">&lt;a href="https://google.com" target="_blank"&gt;Google&lt;/a&gt;</td>
+          <td class="note">target="_blank" abre em nova aba. href="#id" vai pra seção.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;img&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Exibe uma imagem.</td>
+          <td class="example">&lt;img src="foto.jpg" alt="Descrição da foto"&gt;</td>
+          <td class="note">Sem fechamento. alt é obrigatório para acessibilidade.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;video&gt;</span><span class="badge badge-block">bloco</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Incorpora um vídeo.</td>
+          <td class="example">&lt;video src="video.mp4" controls&gt;&lt;/video&gt;</td>
+          <td class="note">Atributos: controls, autoplay, loop, muted, poster.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;audio&gt;</span><span class="badge badge-block">bloco</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Incorpora um áudio.</td>
+          <td class="example">&lt;audio src="musica.mp3" controls&gt;&lt;/audio&gt;</td>
+          <td class="note">Atributos: controls, autoplay, loop.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;source&gt;</span><span class="badge badge-meta">meta</span></td>
+          <td class="desc">Define múltiplas fontes para &lt;video&gt; ou &lt;audio&gt;.</td>
+          <td class="example">&lt;source src="video.webm" type="video/webm"&gt;</td>
+          <td class="note">Permite fallback entre formatos.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;iframe&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Incorpora outra página ou conteúdo externo (YouTube, Maps).</td>
+          <td class="example">&lt;iframe src="https://youtube.com/embed/..." allowfullscreen&gt;&lt;/iframe&gt;</td>
+          <td class="note">Cuidado com segurança. Use sandbox quando possível.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;figure&gt;</span><span class="badge badge-block">bloco</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Agrupa mídia com legenda. Usado com &lt;figcaption&gt;.</td>
+          <td class="example">&lt;figure&gt;&lt;img src="foto.jpg"&gt;&lt;figcaption&gt;Legenda&lt;/figcaption&gt;&lt;/figure&gt;</td>
+          <td class="note">Semântico — indica que imagem e legenda são relacionadas.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;figcaption&gt;</span><span class="badge badge-block">bloco</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Legenda de uma &lt;figure&gt;.</td>
+          <td class="example">&lt;figcaption&gt;Foto do pôr do sol&lt;/figcaption&gt;</td>
+          <td class="note">Filho de &lt;figure&gt;.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;svg&gt;</span><span class="badge badge-inline">inline</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Gráfico vetorial escalável diretamente no HTML.</td>
+          <td class="example">&lt;svg width="100" height="100"&gt;&lt;circle cx="50" cy="50" r="40"/&gt;&lt;/svg&gt;</td>
+          <td class="note">Não perde qualidade ao escalar. Ótimo para ícones.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;canvas&gt;</span><span class="badge badge-block">bloco</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Área de desenho 2D/3D controlada via JavaScript.</td>
+          <td class="example">&lt;canvas id="meuCanvas" width="400" height="300"&gt;&lt;/canvas&gt;</td>
+          <td class="note">Usado para jogos, gráficos e animações com JS.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== LAYOUT / CONTAINERS ==================== -->
+  <div class="section">
+    <div class="section-title">📦 Layout e Containers</div>
+    <table class="tag-table">
+      <thead><tr><th>Tag</th><th>O que faz</th><th>Exemplo</th><th>Obs</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag">&lt;div&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Container genérico de bloco. O mais usado para layout.</td>
+          <td class="example">&lt;div class="container"&gt;...&lt;/div&gt;</td>
+          <td class="note">Sem significado semântico. Use tags semânticas quando possível.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;header&gt;</span><span class="badge badge-block">bloco</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Cabeçalho da página ou de uma seção.</td>
+          <td class="example">&lt;header&gt;&lt;nav&gt;...&lt;/nav&gt;&lt;/header&gt;</td>
+          <td class="note">Pode haver vários &lt;header&gt; (um por seção).</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;nav&gt;</span><span class="badge badge-block">bloco</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Bloco de navegação — menus, links principais.</td>
+          <td class="example">&lt;nav&gt;&lt;a href="#"&gt;Início&lt;/a&gt;&lt;/nav&gt;</td>
+          <td class="note">Usado para leitores de tela identificarem a navegação.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;main&gt;</span><span class="badge badge-block">bloco</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Conteúdo principal da página. Único por página.</td>
+          <td class="example">&lt;main&gt;...conteúdo...&lt;/main&gt;</td>
+          <td class="note">Melhora acessibilidade e SEO. Apenas um por página.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;section&gt;</span><span class="badge badge-block">bloco</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Seção temática do conteúdo. Deve ter um título (h2, h3...).</td>
+          <td class="example">&lt;section id="sobre"&gt;&lt;h2&gt;Sobre&lt;/h2&gt;...&lt;/section&gt;</td>
+          <td class="note">Diferente de &lt;div&gt; — tem significado semântico.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;article&gt;</span><span class="badge badge-block">bloco</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Conteúdo independente e reutilizável (post, card, notícia).</td>
+          <td class="example">&lt;article&gt;&lt;h2&gt;Post do Blog&lt;/h2&gt;&lt;p&gt;...&lt;/p&gt;&lt;/article&gt;</td>
+          <td class="note">Pode ser distribuído separado do resto da página.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;aside&gt;</span><span class="badge badge-block">bloco</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Conteúdo lateral relacionado — sidebar, nota lateral.</td>
+          <td class="example">&lt;aside&gt;&lt;p&gt;Dica relacionada&lt;/p&gt;&lt;/aside&gt;</td>
+          <td class="note">Complementar ao conteúdo principal.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;footer&gt;</span><span class="badge badge-block">bloco</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Rodapé da página ou de uma seção.</td>
+          <td class="example">&lt;footer&gt;&lt;p&gt;© 2025&lt;/p&gt;&lt;/footer&gt;</td>
+          <td class="note">Pode haver vários &lt;footer&gt; (um por seção).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== TABELAS ==================== -->
+  <div class="section">
+    <div class="section-title">📊 Tabelas</div>
+    <table class="tag-table">
+      <thead><tr><th>Tag</th><th>O que faz</th><th>Exemplo</th><th>Obs</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag">&lt;table&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Define uma tabela.</td>
+          <td class="example">&lt;table&gt;...&lt;/table&gt;</td>
+          <td class="note">Não use tabelas para layout — use CSS Grid/Flexbox.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;thead&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Agrupa as linhas do cabeçalho da tabela.</td>
+          <td class="example">&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Nome&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;</td>
+          <td class="note">Semântico — ajuda leitores de tela.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;tbody&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Agrupa as linhas do corpo da tabela.</td>
+          <td class="example">&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;João&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;</td>
+          <td class="note"></td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;tfoot&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Agrupa as linhas do rodapé da tabela.</td>
+          <td class="example">&lt;tfoot&gt;&lt;tr&gt;&lt;td&gt;Total&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;</td>
+          <td class="note">Pode aparecer antes do &lt;tbody&gt; no código.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;tr&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Linha da tabela.</td>
+          <td class="example">&lt;tr&gt;&lt;td&gt;Dado&lt;/td&gt;&lt;/tr&gt;</td>
+          <td class="note">Table Row.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;th&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Célula de cabeçalho — negrito e centralizado por padrão.</td>
+          <td class="example">&lt;th scope="col"&gt;Nome&lt;/th&gt;</td>
+          <td class="note">Use o atributo scope para acessibilidade.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;td&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Célula de dado da tabela.</td>
+          <td class="example">&lt;td colspan="2"&gt;Célula larga&lt;/td&gt;</td>
+          <td class="note">colspan = mesclar colunas. rowspan = mesclar linhas.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;caption&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Título/legenda da tabela.</td>
+          <td class="example">&lt;caption&gt;Vendas 2025&lt;/caption&gt;</td>
+          <td class="note">Primeiro filho de &lt;table&gt;.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== FORMULÁRIOS ==================== -->
+  <div class="section">
+    <div class="section-title">📝 Formulários</div>
+    <table class="tag-table">
+      <thead><tr><th>Tag</th><th>O que faz</th><th>Exemplo</th><th>Obs</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag">&lt;form&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Container de formulário que envia dados.</td>
+          <td class="example">&lt;form action="/enviar" method="POST"&gt;...&lt;/form&gt;</td>
+          <td class="note">method: GET (URL) ou POST (corpo da requisição).</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;input&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Campo de entrada — o mais versátil do HTML.</td>
+          <td class="example">&lt;input type="text" name="nome" placeholder="Seu nome"&gt;<br>&lt;input type="email"&gt; &lt;input type="password"&gt;<br>&lt;input type="checkbox"&gt; &lt;input type="radio"&gt;<br>&lt;input type="file"&gt; &lt;input type="submit"&gt;<br>&lt;input type="number" min="0" max="100"&gt;<br>&lt;input type="date"&gt; &lt;input type="color"&gt;</td>
+          <td class="note">Tag sem fechamento. O atributo type muda o comportamento completamente.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;label&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Rótulo de um campo. Ao clicar, foca no input associado.</td>
+          <td class="example">&lt;label for="email"&gt;E-mail:&lt;/label&gt;<br>&lt;input id="email" type="email"&gt;</td>
+          <td class="note">O for deve bater com o id do input. Essencial para acessibilidade.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;textarea&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Campo de texto multilinha.</td>
+          <td class="example">&lt;textarea rows="5" cols="40" placeholder="Mensagem..."&gt;&lt;/textarea&gt;</td>
+          <td class="note">Diferente de &lt;input&gt;, tem fechamento.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;select&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Lista suspensa (dropdown).</td>
+          <td class="example">&lt;select name="estado"&gt;<br>  &lt;option value="sp"&gt;São Paulo&lt;/option&gt;<br>  &lt;option value="rj"&gt;Rio de Janeiro&lt;/option&gt;<br>&lt;/select&gt;</td>
+          <td class="note">Atributo multiple permite seleção múltipla.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;option&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Opção dentro de um &lt;select&gt; ou &lt;datalist&gt;.</td>
+          <td class="example">&lt;option value="mg" selected&gt;Minas Gerais&lt;/option&gt;</td>
+          <td class="note">selected define o padrão.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;button&gt;</span><span class="badge badge-inline">inline</span></td>
+          <td class="desc">Botão clicável.</td>
+          <td class="example">&lt;button type="submit"&gt;Enviar&lt;/button&gt;<br>&lt;button type="button" onclick="minhaFuncao()"&gt;Clique&lt;/button&gt;</td>
+          <td class="note">type="button" não submete o form. type="submit" envia.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;fieldset&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Agrupa campos relacionados em um formulário.</td>
+          <td class="example">&lt;fieldset&gt;&lt;legend&gt;Dados Pessoais&lt;/legend&gt;...&lt;/fieldset&gt;</td>
+          <td class="note">Adiciona borda visual ao grupo.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;legend&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Título de um &lt;fieldset&gt;.</td>
+          <td class="example">&lt;legend&gt;Endereço&lt;/legend&gt;</td>
+          <td class="note">Filho direto de &lt;fieldset&gt;.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;datalist&gt;</span><span class="badge badge-block">bloco</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Lista de sugestões para um &lt;input&gt;.</td>
+          <td class="example">&lt;input list="cidades"&gt;<br>&lt;datalist id="cidades"&gt;<br>  &lt;option value="São Paulo"&gt;<br>&lt;/datalist&gt;</td>
+          <td class="note">Autocomplete nativo do browser.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== SEMÂNTICA ==================== -->
+  <div class="section">
+    <div class="section-title">🏷️ Outros Elementos Semânticos</div>
+    <table class="tag-table">
+      <thead><tr><th>Tag</th><th>O que faz</th><th>Exemplo</th><th>Obs</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag">&lt;details&gt;</span><span class="badge badge-block">bloco</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Componente abre/fecha (accordion) nativo do browser.</td>
+          <td class="example">&lt;details&gt;&lt;summary&gt;Ver mais&lt;/summary&gt;&lt;p&gt;Conteúdo oculto&lt;/p&gt;&lt;/details&gt;</td>
+          <td class="note">Zero JavaScript necessário.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;summary&gt;</span><span class="badge badge-inline">inline</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Título clicável de um &lt;details&gt;.</td>
+          <td class="example">&lt;summary&gt;Clique para expandir&lt;/summary&gt;</td>
+          <td class="note">Filho direto de &lt;details&gt;.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;dialog&gt;</span><span class="badge badge-block">bloco</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Caixa de diálogo / modal nativa do browser.</td>
+          <td class="example">&lt;dialog id="modal"&gt;&lt;p&gt;Olá!&lt;/p&gt;&lt;/dialog&gt;</td>
+          <td class="note">Abrir com JS: document.getElementById('modal').showModal()</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;progress&gt;</span><span class="badge badge-inline">inline</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Barra de progresso.</td>
+          <td class="example">&lt;progress value="70" max="100"&gt;&lt;/progress&gt;</td>
+          <td class="note">Sem value = indeterminado (animação).</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;meter&gt;</span><span class="badge badge-inline">inline</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Medidor de valor em um intervalo (ex: nível de bateria).</td>
+          <td class="example">&lt;meter value="0.7" min="0" max="1"&gt;70%&lt;/meter&gt;</td>
+          <td class="note">Diferente de &lt;progress&gt; — tem valor atual definido.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;time&gt;</span><span class="badge badge-inline">inline</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Representa data ou hora de forma semântica.</td>
+          <td class="example">&lt;time datetime="2025-12-25"&gt;Natal 2025&lt;/time&gt;</td>
+          <td class="note">Ajuda buscadores a entenderem datas.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;address&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Informações de contato do autor ou dono da página.</td>
+          <td class="example">&lt;address&gt;contato@email.com&lt;/address&gt;</td>
+          <td class="note">Italicizado por padrão na maioria dos browsers.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;map&gt; + &lt;area&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Define áreas clicáveis em uma imagem (image map).</td>
+          <td class="example">&lt;img src="mapa.jpg" usemap="#mapa"&gt;<br>&lt;map name="mapa"&gt;&lt;area shape="rect" coords="0,0,100,100" href="pag.html"&gt;&lt;/map&gt;</td>
+          <td class="note">Pouco usado hoje. Preferir CSS + JS.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;template&gt;</span><span class="badge badge-meta">meta</span><span class="badge badge-new">HTML5</span></td>
+          <td class="desc">Conteúdo HTML inerte que pode ser clonado via JavaScript.</td>
+          <td class="example">&lt;template id="card-template"&gt;&lt;div class="card"&gt;...&lt;/div&gt;&lt;/template&gt;</td>
+          <td class="note">Não renderiza visualmente. Útil com JS para gerar conteúdo dinâmico.</td>
+        </tr>
+        <tr>
+          <td><span class="tag">&lt;noscript&gt;</span><span class="badge badge-block">bloco</span></td>
+          <td class="desc">Conteúdo exibido quando o JavaScript está desativado.</td>
+          <td class="example">&lt;noscript&gt;&lt;p&gt;Ative o JavaScript.&lt;/p&gt;&lt;/noscript&gt;</td>
+          <td class="note"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+  function filtrar() {
+    const termo = document.getElementById('search').value.toLowerCase();
+    const linhas = document.querySelectorAll('.tag-table tbody tr');
+    linhas.forEach(linha => {
+      linha.classList.toggle('hidden', !linha.textContent.toLowerCase().includes(termo));
+    });
+    // Mostrar/ocultar sections sem resultados
+    document.querySelectorAll('.section').forEach(sec => {
+      const visiveis = sec.querySelectorAll('tbody tr:not(.hidden)');
+      sec.style.display = visiveis.length === 0 && termo ? 'none' : '';
+    });
+  }
+</script>
+
+</body>
+</html>
